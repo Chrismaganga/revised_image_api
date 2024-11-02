@@ -1,1 +1,10 @@
-test url:http://localhost:3000/api/images?filename=lap.png&width=200&height=200
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/image-processing-api.git
+   cd revised_image_api
+
+   npm install
+   npm run watch
+   npm run test

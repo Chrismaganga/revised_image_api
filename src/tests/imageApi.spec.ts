@@ -1,32 +1,6 @@
-// import supertest from 'supertest';
-// import app from '../index';
-// import path from 'path';
-// import { resizeImageFile } from '../utils/imageProcessor';
 
-// const request = supertest(app);
+import fs from 'fs'; // Import the 'fs' module
 
-// describe('Image API Endpoints', () => {
-//   it('should upload an image', async () => {
-//     const response = await request
-//       .post('/api/images/upload')
-//       .attach('image', path.resolve(__dirname, '../../assets/test.png'));
-//     expect(response.status).toBe(200);
-//     expect(response.text).toBe('Image uploaded successfully');
-//   });
-
-//   it('should resize an image', async () => {
-//     const filename = 'test.png';
-//     const width = 200;
-//     const height = 200;
-//     const resizedPath = await resizeImageFile(filename, width, height);
-//     expect(resizedPath).toContain(`test-${width}x${height}.png`);
-//   });
-
-//   it('should return an error for missing parameters', async () => {
-//     const response = await request.get('/api/images?filename=test.png');
-//     expect(response.status).toBe(400);
-//   });
-// });
 import supertest from 'supertest';
 import app from '../index';
 import path from 'path';
@@ -43,6 +17,8 @@ describe('Image API Endpoints', () => {
     expect(response.text).toBe('Image uploaded successfully');
   });
 
+
+  // ... previous code remains the same
   it('should resize an image', async () => {
     const filename = 'test.png';
     const width = 200;
@@ -55,6 +31,8 @@ describe('Image API Endpoints', () => {
     const resizedPath = await resizeImageFile(filename, width, height);
     expect(resizedPath).toContain(`test-${width}x${height}.png`);
   });
+
+  // ... the rest of the component
 
   it('should return an error for missing parameters', async () => {
     const response = await request.get('/api/images?filename=test.png'); // This should match your route

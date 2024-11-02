@@ -1,4 +1,3 @@
-
 import fs from 'fs'; // Import the 'fs' module
 
 import supertest from 'supertest';
@@ -17,7 +16,6 @@ describe('Image API Endpoints', () => {
     expect(response.text).toBe('Image uploaded successfully');
   });
 
-
   // ... previous code remains the same
   it('should resize an image', async () => {
     const filename = 'test.png';
@@ -25,7 +23,10 @@ describe('Image API Endpoints', () => {
     const height = 200;
 
     // Ensure the image exists before attempting to resize it
-    const fileExists = await fs.promises.access(path.resolve(__dirname, '../../assets/images', filename)).then(() => true).catch(() => false);
+    const fileExists = await fs.promises
+      .access(path.resolve(__dirname, '../../assets/images', filename))
+      .then(() => true)
+      .catch(() => false);
     expect(fileExists).toBe(true);
 
     const resizedPath = await resizeImageFile(filename, width, height);
@@ -41,13 +42,17 @@ describe('Image API Endpoints', () => {
   });
 
   it('should return an error for invalid dimensions', async () => {
-    const response = await request.get('/api/images?filename=test.png&width=abc&height=100');
+    const response = await request.get(
+      '/api/images?filename=test.png&width=abc&height=100'
+    );
     expect(response.status).toBe(400);
     expect(response.text).toBe('Width and height must be positive numbers'); // Adjust based on your API's response
   });
 
   it('should return an error for a non-existent image', async () => {
-    const response = await request.get('/api/images?filename=nonexistent.png&width=200&height=200');
+    const response = await request.get(
+      '/api/images?filename=nonexistent.png&width=200&height=200'
+    );
     expect(response.status).toBe(404); // Assuming you handle 404 errors
     expect(response.text).toBe('Image not found'); // Adjust based on your API's response
   });

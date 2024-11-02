@@ -4,7 +4,6 @@ import { uploadSingle } from '../middleware/upload';
 
 const router = express.Router();
 
-
 router.post('/upload', uploadSingle, processImage);
 router.get('/', resizeImage);
 

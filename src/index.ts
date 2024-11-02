@@ -1,6 +1,6 @@
 import express from 'express';
 import path from 'path';
-import cors from 'cors';  // Import CORS
+import cors from 'cors'; // Import CORS
 import imageRoutes from './routes/imageRoutes';
 
 const app = express();

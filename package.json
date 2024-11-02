@@ -6,7 +6,8 @@
     "start": "ts-node src/index.ts",
     "watch": "nodemon src/index.ts",
     "build": "tsc",
-    "test": "jasmine"
+    "test": "jasmine",
+    "prettier": "prettier --config .prettierrc \"src/**/*.ts\" --write"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +30,7 @@
     "jasmine": "^5.4.0",
     "jasmine-ts": "^0.4.0",
     "nodemon": "^3.1.7",
+    "prettier": "^3.3.3",
     "supertest": "^7.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"

@@ -79,7 +79,10 @@ export const processImage = (req: MulterRequest, res: Response): void => {
 };
 
 // Resize and serve the image
-export const resizeImage = async (req: Request, res: Response): Promise<void> => {
+export const resizeImage = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   const { filename, width, height } = req.query;
 
   // Validate parameters
@@ -92,7 +95,12 @@ export const resizeImage = async (req: Request, res: Response): Promise<void> =>
   const heightNumber = parseInt(height as string, 10);
 
   // Ensure width and height are valid numbers
-  if (isNaN(widthNumber) || isNaN(heightNumber) || widthNumber <= 0 || heightNumber <= 0) {
+  if (
+    isNaN(widthNumber) ||
+    isNaN(heightNumber) ||
+    widthNumber <= 0 ||
+    heightNumber <= 0
+  ) {
     res.status(400).send('Width and height must be positive numbers');
     return;
   }

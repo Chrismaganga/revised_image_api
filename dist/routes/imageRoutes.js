@@ -7,6 +7,8 @@ const express_1 = __importDefault(require("express"));
 const imageController_1 = require("../controllers/imageController");
 const upload_1 = require("../middleware/upload");
 const router = express_1.default.Router();
+// Route to handle image upload and processing
 router.post('/upload', upload_1.uploadSingle, imageController_1.processImage);
-router.get('/', imageController_1.resizeImage);
+// Route to handle image resizing
+router.get('/resize', imageController_1.resizeImage);
 exports.default = router;

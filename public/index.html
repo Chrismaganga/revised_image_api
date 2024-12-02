@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload</title>
+</head>
+<body>
+    <h1>Upload an Image</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <label for="imageInput">Choose an image to upload:</label>
+        <input type="file" id="imageInput" name="image" accept="image/*" required title="Choose an image to upload">
+        <button type="submit">Upload</button>
+    </form>
+    <div id="response"></div>
+    <div id="imageContainer"></div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData();
+            const imageInput = document.getElementById('imageInput');
+            formData.append('image', imageInput.files[0]);
+
+            try {
+                const response = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const result = await response.json();
+                const imageUrl = URL.createObjectURL(imageInput.files[0]);
+                const imgElement = document.createElement('img');
+                imgElement.src = imageUrl;
+                imgElement.alt = 'Uploaded Image';
+                imgElement.style.maxWidth = '100%';
+                document.getElementById('imageContainer').appendChild(imgElement);
+            
+            } catch (error) {
+                console.error('Error uploading image:', error);
+                document.getElementById('response').innerText = 'Error uploading image';
+            }
+        });
+    </script>
+</body>
+</html>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="file"] {
+        padding: 10px;
+    }
+
+    button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    #response {
+        margin-top: 20px;
+        white-space: pre-wrap;
+        text-align: left;
+        max-width: 80%;
+        word-wrap: break-word;
+    }
+
+    #imageContainer {
+        margin-top: 20px;
+    }
+</style>
